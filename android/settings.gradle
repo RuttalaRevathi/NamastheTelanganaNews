@@ -1,0 +1,21 @@
+rootProject.name = 'NTNews'
+apply from: file("../node_modules/@react-native-community/cli-platform-android/native_modules.gradle"); applyNativeModulesSettingsGradle(settings)
+include ':app'
+includeBuild('../node_modules/react-native-gradle-plugin')
+// Added by Revathi
+include ':react-native-vector-icons'
+project(':react-native-vector-icons').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-vector-icons/android')
+if (settings.hasProperty("newArchEnabled") && settings.newArchEnabled == "true") {
+    include(":ReactAndroid")
+    project(":ReactAndroid").projectDir = file('../node_modules/react-native/ReactAndroid')
+    include(":ReactAndroid:hermes-engine")
+    project(":ReactAndroid:hermes-engine").projectDir = file('../node_modules/react-native/ReactAndroid/hermes-engine')
+
+return require("deprecated-react-native-prop-types").ColorPropType
+return require("deprecated-react-native-prop-types").EdgeInsetsPropType
+return require("deprecated-react-native-prop-types").PointPropType
+return require("deprecated-react-native-prop-types").ViewPropTypes
+
+include ':react-native-splash-screen'
+    project(':react-native-splash-screen').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-splash-screen/android')
+}
