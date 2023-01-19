@@ -1,7 +1,9 @@
 /* eslint-disable prettier/prettier */
-import * as React from 'react';
+import React , {useEffect, useRef, useState} from 'react';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
-import { Image } from 'react-native';
+import Modal from 'react-native-modal';
+import { SelectList } from 'react-native-dropdown-select-list';
+import { Image, Text, TouchableOpacity, View } from 'react-native';
 import Home from '../screens/Home';
 import Details from '../screens/Details';
 import { appThemeColor, blackcolor, Dark_Gray, light_blue, red } from '../styles/commonstyles';
@@ -37,7 +39,24 @@ import Rangareddy from '../screens/DistrictScreens/Rangareddy';
 import Warangal from '../screens/DistrictScreens/Warangal';
 
 const TopTab = createMaterialTopTabNavigator();
+const data = [
+  { label: 'Item 1', value: '1' },
+  { label: 'Item 2', value: '2' },
+
+];
+const renderLabel = () => {
+  return (
+    <SelectList
+        setSelected={(val) => setSelected(val)}
+        data={data}
+        save="value"
+    />
+  );
+};
+
 const TopTabNavigator = () => {
+  const [selected, setSelected] = React.useState('');
+
   return (
     <TopTab.Navigator
       screenOptions={({ focused }) => ({
@@ -57,26 +76,25 @@ const TopTabNavigator = () => {
           showLabel: true,
         },
       })}>
-      {/* <TopTab.Screen name="Home" component={Home} /> */}
       <TopTab.Screen
-      name="."
-      component={Home}
-      options={{
-        headerShown: false,
-        // tabBarLabel: 'Home',
-        tabBarIcon: ({color, focused}) => (
-          <Image
-            style={{
-              height: 20,
-              width: 20,
-              tintColor: focused ? appThemeColor :blackcolor,
-              top: 5,
-            }}
-            source={require('../Assets/Images/home.png')}
-          />
-        ),
-      }}
-    />
+        name="."
+        component={Home}
+        options={{
+          headerShown: false,
+          // tabBarLabel: 'Home',
+          tabBarIcon: ({ color, focused }) => (
+            <Image
+              style={{
+                height: 20,
+                width: 20,
+                tintColor: focused ? appThemeColor : blackcolor,
+                top: 5,
+              }}
+              source={require('../Assets/Images/home.png')}
+            />
+          ),
+        }}
+      />
       <TopTab.Screen name="లేటెస్ట్ న్యూస్" component={LatestNews} />
       <TopTab.Screen name="సినిమా" component={CinemaScreen} />
       <TopTab.Screen name="రాశి ఫలాలు‌" component={RasiPhalaluScreen} />
@@ -98,17 +116,47 @@ const TopTabNavigator = () => {
       <TopTab.Screen name="వ్యవసాయం" component={AgricultureScreen} />
       <TopTab.Screen name="వంటలు" component={CookingScreen} />
       <TopTab.Screen name="వాస్తు" component={VaasthuScreen} />
-      {/* <TopTab.Screen name="ఆదిలాబాద్" component={Adilabad} /> */}
-      {/* <TopTab.Screen name="కరీంనగర్‌" component={Karimnagar} />
+      {/* <TopTab.Screen
+      name="జిల్లాలు"
+      component={VaasthuScreen}
+      options={{
+        headerShown: false,
+        tabBarLabel: 'జిల్లాలు',
+        tabBarButton: props => (
+          <TouchableOpacity
+            {...props}
+            onPress={<SelectList
+              setSelected={(val) => setSelected(val)}
+              data={data}
+              // save="value"
+          />}
+          />
+        ),
+
+        tabBarIcon: ({color, focused}) => (
+          <Image
+            style={{
+              height: 20,
+              width: 20,
+              tintColor: focused ? appThemeColor : Dark_Gray,
+              top: 5,
+            }}
+            source={require('../Assets/Images/paper.png')}
+          />
+        ),
+      }}
+    /> */}
+      {/* <TopTab.Screen name="ఆదిలాబాద్" component={Adilabad} />
+       <TopTab.Screen name="కరీంనగర్‌" component={Karimnagar} />
       <TopTab.Screen name="ఖమ్మం" component={Khammam} />
       <TopTab.Screen name="మెహబూబ్ నగర్" component={Mahabubnagar} />
       <TopTab.Screen name="మెదక్" component={Medak} />
       <TopTab.Screen name="నల్గొండ" component={Nalgonda} />
       <TopTab.Screen name="నిజామాబాద్" component={Nizamabad} />
-      <TopTab.Screen name="రంగారెడ్డి" component={Rangareddy} /> */}
-      {/* <TopTab.Screen name="వరంగల్" component={Warangal} /> */}
+      <TopTab.Screen name="రంగారెడ్డి" component={Rangareddy} />
+       <TopTab.Screen name="వరంగల్" component={Warangal} /> */}
 
-    
+
     </TopTab.Navigator>
   );
 };

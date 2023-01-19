@@ -1,5 +1,5 @@
 /* eslint-disable prettier/prettier */
-import {BaseUrl, CategoryUrl, Karimnagar} from '../../utilities/urls';
+import {Adilabad, BaseUrl, CategoryUrl, Karimnagar} from '../../utilities/urls';
 
 /* eslint-disable prettier/prettier */
 export const GET_KARIMNAGAR_SUCCESS = 'GET_KARIMNAGAR_SUCCESS';
@@ -12,13 +12,14 @@ export const getKarimnagarAction = () => {
       dispatch({
         type: GET_KARIMNAGAR,
       });
-      const result = await fetch(BaseUrl + CategoryUrl + Karimnagar, {
+      const result = await fetch('https://www.ntnews.com/wp-json/ntnews/v1/category-api?cat_name=karimnagar', {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
         },
       });
       const json = await result.json();
+      console.log(json,"result=================@@@@@@@@@@@@@@@@@@@@@@@@2 in karimnagar Action");
       if (json) {
         dispatch({
           type: GET_KARIMNAGAR_SUCCESS,

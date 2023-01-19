@@ -19,7 +19,7 @@ const KarimnagarScreen = ({
         // dispatch(getKarimnagarAction());
 
     }, []);
-    console.log(karimnagarData,"==========================karimnagarData");
+    console.log(karimnagarData,"==========================karimnagarData in screen");
 
     return (
         <CategoryUI

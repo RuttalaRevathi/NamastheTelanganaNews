@@ -1,3 +1,4 @@
+/* eslint-disable react-native/no-inline-styles */
 /* eslint-disable prettier/prettier */
 import React, { useEffect, useRef, useState } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, Image, Linking, ScrollView, FlatList, Share, Dimensions } from 'react-native';
@@ -63,7 +64,7 @@ const Details = ({ navigation, relatedData, relatedLoading,
                 navigation.goBack();
               }}
               style={{ zIndex: 999 }}>
-              <Image
+              <FastImage
                 source={require('../Assets/Images/arrow.png')}
                 style={{ width: 18, height: 18, top: 10 }}
               />
@@ -84,7 +85,7 @@ const Details = ({ navigation, relatedData, relatedLoading,
                   '%3Futm_source%3Dreferral%26utm_medium%3DFB%26utm_campaign%3Dsocial_share&app_id=369158533547966',
                 );
               }}>
-              <Image
+              <FastImage
                 resizeMode="contain"
                 source={require('../Assets/Images/facebook_share.png')}
                 style={{ width: 30, height: 30 }}
@@ -97,7 +98,7 @@ const Details = ({ navigation, relatedData, relatedLoading,
                   route?.params?.item?.link,
                 );
               }}>
-              <Image
+              <FastImage
                 resizeMode="contain"
                 source={require('../Assets/Images/twitter_share.png')}
                 style={{ width: 30, height: 30 }}
@@ -121,7 +122,7 @@ const Details = ({ navigation, relatedData, relatedLoading,
                   'https://t.me/share?url=' + route?.params?.item?.link +'&text=',
                 );
               }}>
-              <Image
+              <FastImage
                 resizeMode="contain"
                 source={require('../Assets/Images/telegram_icon.png')}
                 style={{ width: 30, height: 30 }}
@@ -168,7 +169,7 @@ const Details = ({ navigation, relatedData, relatedLoading,
               pointerEvents: 'none',
               paddingLeft: 10,
             }}>
-           <AutoHeightWebView style={{ width: Dimensions.get('window').width - 15, marginTop: 35 ,}}
+           <AutoHeightWebView style={{ width: Dimensions.get('window').width - 15, marginTop: 35 }}
               customStyle={`
               * {
                 font-family: 'Mandali-Bold';
@@ -311,7 +312,7 @@ const Details = ({ navigation, relatedData, relatedLoading,
                     </View>
                   </View>
                   <View>
-                    <Image
+                    <FastImage
                       source={{ uri: item?.web_featured_image }}
                       style={commonstyles.Detailslargecard}
                     />

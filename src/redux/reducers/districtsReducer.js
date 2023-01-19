@@ -95,7 +95,11 @@ function karimnagarReducer(state = initialState, action) {
     case GET_KARIMNAGAR:
       return { ...state, karimnagarLoading: false };
     case GET_KARIMNAGAR_SUCCESS:
-      return { ...state, karimnagarData: action.payload, karimnagarLoading: true };
+      console.log(...state.karimnagarData,"karimnagar data in districts reducer");
+
+      return { ...state, karimnagarData: action.payload, karimnagarLoading: true 
+      };
+      
      case GET_KARIMNAGAR_ERROR:
       return { ...state, karimnagarLoading: false, error: true };
     default:
