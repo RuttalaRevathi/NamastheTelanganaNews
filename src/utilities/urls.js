@@ -1,8 +1,8 @@
 /* eslint-disable prettier/prettier */
 // Live version-1
-// export const BaseUrl = 'https://ntnews.com/wp-json/ntnews/v1/';
-// Live version-2
 export const BaseUrl = 'https://ntnews.com/wp-json/ntnews/v1/';
+// Live version-2
+// export const BaseUrl = 'https://ntnews.com/wp-json/ntnews/v2/';
 // Testing Url
 // export const BaseUrl='https://veegam2.ntnews.com/wp-json/ntnews/v1/'
 // export const category='https://ntnews.com/wp-json/ntnews/v1/category-api?cat_name='
@@ -16,7 +16,7 @@ export const WebstoriesUrl = 'webstories-api';
 export const RelatedUrl = 'article-related-api';
 export const Contact = 'contact-us-api';
 export const Next = 'article-next-prev-by-id-api';
-export const article = 'article-data-by-id-api';
+export const articleDetails = 'article-data-by-id-api';
 
 // Category Urls
 export const Adilabad = 'adilabad';

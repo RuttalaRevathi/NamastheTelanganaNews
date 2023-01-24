@@ -5,7 +5,7 @@ import Modal from 'react-native-modal';
 import { SelectList } from 'react-native-dropdown-select-list';
 import { Image, Text, TouchableOpacity, View } from 'react-native';
 import Home from '../screens/Home';
-import Details from '../screens/Details';
+import FastImage from 'react-native-fast-image';
 import { appThemeColor, blackcolor, Dark_Gray, light_blue, red } from '../styles/commonstyles';
 import HyderabadScreen from '../screens/TopTabScreens/Hyderabad';
 import CinemaScreen from '../screens/TopTabScreens/Cinema';
@@ -83,7 +83,7 @@ const TopTabNavigator = () => {
           headerShown: false,
           // tabBarLabel: 'Home',
           tabBarIcon: ({ color, focused }) => (
-            <Image
+            <FastImage
               style={{
                 height: 20,
                 width: 20,
@@ -97,12 +97,12 @@ const TopTabNavigator = () => {
       />
       <TopTab.Screen name="లేటెస్ట్ న్యూస్" component={LatestNews} />
       <TopTab.Screen name="సినిమా" component={CinemaScreen} />
-      <TopTab.Screen name="రాశి ఫలాలు‌" component={RasiPhalaluScreen} />
+      <TopTab.Screen name="రాశిఫలాలు‌" component={RasiPhalaluScreen} />
       <TopTab.Screen name="కార్టూన్‌" component={CartoonScreen} />
       <TopTab.Screen name="ఆరోగ్యం" component={HealthScreen} />
       <TopTab.Screen name="హైదరాబాద్‌" component={HyderabadScreen} />
       <TopTab.Screen name="తెలంగాణ" component={TelanganaScreen} />
-      <TopTab.Screen name="ఏపీ" component={ApScreen} />
+      <TopTab.Screen name="ఆంధ్రప్రదేశ్" component={ApScreen} />
       <TopTab.Screen name="జాతీయం" component={NationalScreen} />
       <TopTab.Screen name="అంతర్జాతీయం" component={InterNationalScreen} />
       <TopTab.Screen name="స్పోర్ట్స్" component={SportsScreen} />
@@ -134,7 +134,7 @@ const TopTabNavigator = () => {
         ),
 
         tabBarIcon: ({color, focused}) => (
-          <Image
+          <FastImage
             style={{
               height: 20,
               width: 20,

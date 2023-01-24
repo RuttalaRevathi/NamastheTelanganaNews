@@ -5,7 +5,7 @@ import { View, Text, StyleSheet, TouchableOpacity, Image, Linking, ScrollView, F
 import { appThemeColor, blackcolor, commonstyles, Header_text, whitecolor } from '../styles/commonstyles';
 import AutoHeightWebView from 'react-native-autoheight-webview';
 import LinearGradient from 'react-native-linear-gradient';
-import Feather from 'react-native-vector-icons/Feather';
+import FastImage from 'react-native-fast-image';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import { HeaderStyle } from '../styles/Header.Styles';
 import HTMLView from 'react-native-htmlview';
@@ -45,21 +45,21 @@ const PhotoArticle = ({ navigation, relatedData, relatedLoading,
                             <TouchableOpacity onPress={() => {
                                 navigation.goBack()
                             }} style={{ zIndex: 999, }}>
-                                <Image source={require('../Assets/Images/arrow.png')} style={{ width: 18, height: 18, top: 10 }} />
+                                <FastImage source={require('../Assets/Images/arrow.png')} style={{ width: 18, height: 18, top: 10 }} />
                             </TouchableOpacity>
                         </View>
                         <View style={{ flex: 0.6, flexDirection: 'row', justifyContent: 'space-evenly', paddingTop: 5 }}>
                             <TouchableOpacity onPress={() => { Linking.openURL('http://www.facebook.com/sharer.php?u=' + route?.params?.item?.link + '%3Futm_source%3Dreferral%26utm_medium%3DFB%26utm_campaign%3Dsocial_share&app_id=369158533547966') }} >
-                                <Image resizeMode='contain' source={require('../Assets/Images/facebook_share.png')} style={{ width: 30, height: 30 }} />
+                                <FastImage resizeMode='contain' source={require('../Assets/Images/facebook_share.png')} style={{ width: 30, height: 30 }} />
                             </TouchableOpacity>
                             <TouchableOpacity onPress={() => { Linking.openURL('https://twitter.com/intent/tweet?url=' + route?.params?.item?.link) }} >
-                                <Image resizeMode='contain' source={require('../Assets/Images/twitter_share.png')} style={{ width: 30, height: 30 }} />
+                                <FastImage resizeMode='contain' source={require('../Assets/Images/twitter_share.png')} style={{ width: 30, height: 30 }} />
                             </TouchableOpacity>
                             <TouchableOpacity onPress={() => { Linking.openURL('whatsapp://send?text=' + route?.params?.item?.link) }} >
-                                <Image resizeMode='contain' source={require('../Assets/Images/whatsapp_share.png')} style={{ width: 30, height: 30 }} />
+                                <FastImage resizeMode='contain' source={require('../Assets/Images/whatsapp_share.png')} style={{ width: 30, height: 30 }} />
                             </TouchableOpacity>
                             <TouchableOpacity onPress={() => { Linking.openURL('https://t.me/share?url=' + route?.params?.item?.link) }} >
-                                <Image resizeMode='contain' source={require('../Assets/Images/telegram_icon.png')} style={{ width: 30, height: 30 }} />
+                                <FastImage resizeMode='contain' source={require('../Assets/Images/telegram_icon.png')} style={{ width: 30, height: 30 }} />
                             </TouchableOpacity>
 
                         </View>

@@ -11,6 +11,7 @@ import {
     SafeAreaView,
     Share,
 } from 'react-native';
+import FastImage from 'react-native-fast-image';
 import { commonstyles } from '../../styles/commonstyles';
 import SubHeader from '../../components/SubHeader';
 import { CartoonURl, ShareUrl } from '../../utilities/urls';
@@ -62,7 +63,7 @@ const Cartoon = ({ navigation,
                                 <View style={{ flex: 1, marginRight: 5 }}>
                                     <View style={commonstyles.CartoonCard}>
                                         <TouchableOpacity onPress={() => { navigation.navigate("CartoonArticle", { item: item }) }}  >
-                                            <Image source={{ uri: item?.web_featured_image }} style={commonstyles.cartoonimg} resizeMode="contain" />
+                                            <FastImage  source={{ uri: item?.web_featured_image }} style={commonstyles.cartoonimg} resizeMode="contain" />
 
                                         </TouchableOpacity>
                                     </View>

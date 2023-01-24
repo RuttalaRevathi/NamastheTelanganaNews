@@ -33,12 +33,15 @@ import nalgondaReducer from '../redux/reducers/districtsReducer';
 import nizamabadReducer from '../redux/reducers/districtsReducer';
 import rangareddyReducer from '../redux/reducers/districtsReducer';
 import warangalReducer from '../redux/reducers/districtsReducer';
+import articleDetailReducer from '../redux/reducers/articleDetailReducer';
+
 
 const rootReducer = combineReducers({sliderReducer,latestNewsReducer,hyderabadReducer,
 cinemaReducer,rasiPhalauReducer,cartoonReducer,healthReducer,telanganaReducer,apReducer,
 nationalReducer,interNationalReducer,sportsReducer,businessReducer,nriReducer,relatedReducer,
 photosGalleryReducer,editPageReducer,zindagiReducer,bathukammaReducer,agricultureReducer,
 cookingReducer,vaasthuReducer,videoReducer,adilabadReducer,karimnagarReducer,khammamReducer,
-mahabubnagarReducer,medakReducer,nalgondaReducer,nizamabadReducer,rangareddyReducer,warangalReducer
+mahabubnagarReducer,medakReducer,nalgondaReducer,nizamabadReducer,rangareddyReducer,warangalReducer,
+articleDetailReducer,
 });
 export const store = createStore(rootReducer, applyMiddleware(thunk));

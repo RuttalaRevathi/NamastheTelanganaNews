@@ -13,12 +13,15 @@ import HTMLView from 'react-native-htmlview';
 import moment from 'moment';
 import { connect, useDispatch } from 'react-redux';
 import getRelatedAction from '../redux/actions/getRelatedAction';
-import FastImage from 'react-native-fast-image';
+import getArticleDetailAction from '../redux/actions/getArticleDetailAction';
+// import Image from 'react-native-fast-image';
 const screenWidth = Dimensions.get('window').width;
 
 // let decode = require('html-entities-decoder');
 
 const Details = ({ navigation, relatedData, relatedLoading,
+  articleDetailData,
+  articleDetailLoading,
   sliderData,
   loading,
   latestNews,
@@ -30,28 +33,29 @@ const Details = ({ navigation, relatedData, relatedLoading,
   useEffect(() => {
     dispatch(getRelatedAction(route?.params?.item?.id));
     setDetailsData(route?.params?.detailsData);
+    dispatch(getArticleDetailAction())
   }, []);
-  // console.log(JSON.stringify(route?.params?.item), "===========================item");
 
   useEffect(() => {
     goToTop();
   }, []);
-  const Scrollref = useRef(null);
+  const Scrollref = useRef();
 
   const goToTop = () => {
-    Scrollref.current?.scrollTo({ x: 0, y: 0, animated: true });}
+    Scrollref.current.scrollTo({ x: 0, y: 0, animated: true });
+  }
   const getIndex = () => {
     var index = detailsData.findIndex(
       x => x.id == route?.params?.item?.id,
     );
     return index + 1;
   };
-  
+
   // const source1 = source.replace(
   //   'lazyload',
   //   'text/javascript',
   // );
- 
+
   const source = route?.params?.item?.content?.rendered;
   var source1 = source?.replace('lazyload', 'text/javascript');
   return (
@@ -64,7 +68,7 @@ const Details = ({ navigation, relatedData, relatedLoading,
                 navigation.goBack();
               }}
               style={{ zIndex: 999 }}>
-              <FastImage
+              <Image
                 source={require('../Assets/Images/arrow.png')}
                 style={{ width: 18, height: 18, top: 10 }}
               />
@@ -85,7 +89,7 @@ const Details = ({ navigation, relatedData, relatedLoading,
                   '%3Futm_source%3Dreferral%26utm_medium%3DFB%26utm_campaign%3Dsocial_share&app_id=369158533547966',
                 );
               }}>
-              <FastImage
+              <Image
                 resizeMode="contain"
                 source={require('../Assets/Images/facebook_share.png')}
                 style={{ width: 30, height: 30 }}
@@ -98,7 +102,7 @@ const Details = ({ navigation, relatedData, relatedLoading,
                   route?.params?.item?.link,
                 );
               }}>
-              <FastImage
+              <Image
                 resizeMode="contain"
                 source={require('../Assets/Images/twitter_share.png')}
                 style={{ width: 30, height: 30 }}
@@ -110,7 +114,7 @@ const Details = ({ navigation, relatedData, relatedLoading,
                   'whatsapp://send?text=' + route?.params?.item?.link,
                 );
               }}>
-              <FastImage
+              <Image
                 resizeMode="contain"
                 source={require('../Assets/Images/whatsapp_share.png')}
                 style={{ width: 30, height: 30 }}
@@ -119,10 +123,10 @@ const Details = ({ navigation, relatedData, relatedLoading,
             <TouchableOpacity
               onPress={() => {
                 Linking.openURL(
-                  'https://t.me/share?url=' + route?.params?.item?.link +'&text=',
+                  'https://t.me/share?url=' + route?.params?.item?.link + '&text=',
                 );
               }}>
-              <FastImage
+              <Image
                 resizeMode="contain"
                 source={require('../Assets/Images/telegram_icon.png')}
                 style={{ width: 30, height: 30 }}
@@ -133,10 +137,10 @@ const Details = ({ navigation, relatedData, relatedLoading,
       </View>
 
       <ScrollView
-       ref={Scrollref}>
+        ref={Scrollref}>
         <View>
           <View>
-            <FastImage
+            <Image
               source={{ uri: route?.params?.item?.web_featured_image }}
               style={commonstyles.Detailslargecard}
             />
@@ -169,7 +173,7 @@ const Details = ({ navigation, relatedData, relatedLoading,
               pointerEvents: 'none',
               paddingLeft: 10,
             }}>
-           <AutoHeightWebView style={{ width: Dimensions.get('window').width - 15, marginTop: 35 }}
+            <AutoHeightWebView style={{ width: Dimensions.get('window').width - 15, marginTop: 35 }}
               customStyle={`
               * {
                 font-family: 'Mandali-Bold';
@@ -177,6 +181,7 @@ const Details = ({ navigation, relatedData, relatedLoading,
                 -webkit-user-select: none;
                   -webkit-touch-callout: none; 
                  }
+                
               p {
                 font-size: 16px;
                 text-align:left;
@@ -192,6 +197,10 @@ const Details = ({ navigation, relatedData, relatedLoading,
                                                 width:100%;
                                                 height:inherit
                                               }
+                                              img{
+                                                width:100%;
+                                                height:inherit
+                                              }
                                              
             `}
               source={{
@@ -204,60 +213,67 @@ const Details = ({ navigation, relatedData, relatedLoading,
 
             />
           </View>
+
           {/* Related News */}
           <View>
             <View style={{ marginLeft: 10, marginTop: 10 }}>
               <Text style={commonstyles.relatedText}>Related News</Text>
             </View>
             {/* Related news FlatList */}
+            {relatedData?.data !== 0 && { relatedLoading } ? (
+              <View >
 
-            <View >
-              <FlatList
-                showsHorizontalScrollIndicator={false}
-                persistentScrollbar={false}
-                data={relatedData?.data}
-                renderItem={({ item, index }) => (
-                  <View>
-                    <TouchableOpacity
-                      onPress={() => {
-                        navigation.navigate('Details', {
-                          item: item,
-                          // DetailsData: relatedData,
-                        });
-                      }}>
-                      <View style={commonstyles.cardView}>
-                        <View style={commonstyles.cateviewImg}>
-                          <FastImage
-                            source={{ uri: item?.web_featured_image }}
-                            style={commonstyles.cateImage}
-                          />
-                        </View>
-                        <View style={commonstyles.cateviewText}>
-                          <Text
-                            numberOfLines={2}
-                            ellipsizeMode="tail"
-                            style={commonstyles.latestText}>
-                            {item?.title?.rendered}
-                          </Text>
-                          <View style={commonstyles.timeview}>
-                            <Text style={commonstyles.latesttime}>
-                              {moment(item?.date_gmt).format('DD-MMM-YYYY')}{' '}
-                              ,{' '}
+                <FlatList
+                  showsHorizontalScrollIndicator={false}
+                  persistentScrollbar={false}
+                  data={relatedData?.data}
+                  renderItem={({ item, index }) => (
+                    <View>
+                      <TouchableOpacity
+                        onPress={() => {
+                          navigation.navigate('Details', {
+                            item: item,
+                            // DetailsData: relatedData,
+                          });
+                        }}>
+                        <View style={commonstyles.cardView}>
+                          <View style={commonstyles.cateviewImg}>
+                            <Image
+                              source={{ uri: item?.web_featured_image }}
+                              style={commonstyles.cateImage}
+                            />
+                          </View>
+                          <View style={commonstyles.cateviewText}>
+                            <Text
+                              numberOfLines={2}
+                              ellipsizeMode="tail"
+                              style={commonstyles.latestText}>
+                              {item?.title?.rendered}
                             </Text>
-                            <Text style={commonstyles.latesttime}>
-                              {moment(item?.modified)
-                                .utcOffset('+05:30')
-                                .format('hh.mm a')}{' '}
-                            </Text>
+                            <View style={commonstyles.timeview}>
+                              <Text style={commonstyles.latesttime}>
+                                {moment(item?.date_gmt).format('DD-MMM-YYYY')}{' '}
+                                ,{' '}
+                              </Text>
+                              <Text style={commonstyles.latesttime}>
+                                {moment(item?.modified)
+                                  .utcOffset('+05:30')
+                                  .format('hh.mm a')}{' '}
+                              </Text>
+                            </View>
                           </View>
                         </View>
-                      </View>
-                    </TouchableOpacity>
-                  </View>
-                )}
-              />
-            </View>
+                      </TouchableOpacity>
+                    </View>
+                  )}
+                />
 
+              </View>
+            ) : (
+              <View>
+                <Text>Loading</Text>
+              </View>
+            )}
           </View>
 
           {/* next Articles */}
@@ -277,11 +293,10 @@ const Details = ({ navigation, relatedData, relatedLoading,
                       padding: 10,
                       flexDirection: 'row',
                       justifyContent: 'space-between',
+                      // borderBottomColor:appThemeColor,
+                      // borderBottomWidth:1,marginLeft:5,marginRight:5,
                     }}>
                     <View>
-                      {/* <View>
-                                                            <Feather name="chevrons-down" size={25} color={Dark_Gray} style={{ marginTop: 3 }} />
-                                                        </View> */}
                       <View style={{ flexDirection: 'row' }}>
                         <Feather
                           name="chevrons-down"
@@ -295,7 +310,7 @@ const Details = ({ navigation, relatedData, relatedLoading,
                         </Text>
                       </View>
                     </View>
-                    <View style={{}}>
+                    <View >
                       <TouchableOpacity
                         onPress={() => {
                           Share.share({
@@ -312,7 +327,7 @@ const Details = ({ navigation, relatedData, relatedLoading,
                     </View>
                   </View>
                   <View>
-                    <FastImage
+                    <Image
                       source={{ uri: item?.web_featured_image }}
                       style={commonstyles.Detailslargecard}
                     />
@@ -414,7 +429,7 @@ const Details = ({ navigation, relatedData, relatedLoading,
                             });
                           }}>
                           <View style={commonstyles.sliderView}>
-                            <FastImage
+                            <Image
                               source={{ uri: item.web_featured_image }}
                               style={commonstyles.photocard}
                             />
@@ -475,6 +490,8 @@ type Props = {
   loading: Boolean,
   latestNews: Function,
   latestLoading: Boolean,
+  articleDetailData: Function,
+  articleDetailLoading: Boolean,
 
 };
 
@@ -485,8 +502,11 @@ const mapStateToProps = state => ({
   loading: state.sliderReducer?.loading,
   latestNews: state.latestNewsReducer?.latestNews,
   latestLoading: state.latestNewsReducer?.latestLoading,
+  articleDetailData: state.articleDetailReducer?.articleDetailData,
+  articleDetailLoading: state.articleDetailReducer?.articleDetailLoading,
 });
 const mapDispatchToProps = {
   getRelatedAction,
+  getArticleDetailAction,
 };
 export default connect(mapStateToProps, mapDispatchToProps)(Details);

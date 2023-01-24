@@ -14,7 +14,7 @@ import {
 } from 'react-native';
 import SubHeader from '../components/SubHeader';
 import { commonstyles } from '../styles/commonstyles';
-import getLatestNewsAction from '../redux/actions/getLatestNewsAction';
+import FastImage from 'react-native-fast-image';
 import moment from 'moment';
 import LinearGradient from 'react-native-linear-gradient';
 
@@ -55,7 +55,7 @@ const LatestNews = ({
                       });
                     }}>
                     <View style={commonstyles.sliderView}>
-                      <Image
+                      <FastImage
                         source={{ uri: item?.web_featured_image }}
                         style={commonstyles.slidercard}
                       />
@@ -88,7 +88,7 @@ const LatestNews = ({
                     }}>
                     <View style={commonstyles.cardView}>
                       <View style={commonstyles.cateviewImg}>
-                        <Image
+                        <FastImage
                           source={{ uri: item?.web_featured_image }}
                           style={commonstyles.cateImage}
                         />

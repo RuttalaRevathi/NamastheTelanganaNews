@@ -20,7 +20,6 @@ export default function SubHeader(props, {navigation}) {
             style={{left: 8, zIndex: 999}}
           />
 
-          {/* <Image style={HeaderStyle.subHeaderbuttonImg} source={props.isMenu == true ? require('../../Assets/Images/menu.png') : require('../../Assets/Images/left-arrow.png')} /> */}
         </TouchableOpacity>
       </View>
       <View style={{flex: 1}}>

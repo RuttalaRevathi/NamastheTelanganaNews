@@ -1,5 +1,5 @@
 /* eslint-disable prettier/prettier */
-import {Adilabad, BaseUrl, CategoryUrl} from '../../utilities/urls';
+import { Adilabad, BaseUrl, CategoryUrl } from '../../utilities/urls';
 
 export const GET_ADILABAD_SUCCESS = 'GET_ADILABAD_SUCCESS';
 export const GET_ADILABAD_ERROR = 'GET_ADILABAD_ERROR';
@@ -11,14 +11,13 @@ export const getAdilabadAction = () => {
         type: GET_ADILABAD,
       });
       const result = await fetch(BaseUrl + CategoryUrl + Adilabad, {
-        
+
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
         },
-       
+
       });
-      console.log(result,"====================adilabad");
       const json = await result.json();
       if (json) {
         dispatch({

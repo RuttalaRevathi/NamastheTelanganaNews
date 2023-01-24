@@ -12,6 +12,7 @@ import {
     TouchableOpacity,
     View,
 } from 'react-native';
+import FastImage from 'react-native-fast-image';
 import SubHeader from '../../components/SubHeader';
 import { commonstyles } from '../../styles/commonstyles';
 import getVideoAction from '../../redux/actions/getVideoAction';
@@ -28,7 +29,6 @@ const Videos = ({
         dispatch(getVideoAction());
     }, []);
     // share function
-    console.log('videosData', videosData?.data);
     return (
         <SafeAreaView styles={commonstyles.container}>
             <SubHeader
@@ -64,11 +64,11 @@ const Videos = ({
                                             <View style={commonstyles.latestMainView}>
                                                 <View style={commonstyles.latestsubView}>
                                                     <View>
-                                                        <Image style={commonstyles.latestimgTag} source={{ uri: item?.web_featured_image }} />
+                                                        <FastImage  style={commonstyles.latestimgTag} source={{ uri: item?.web_featured_image }} />
                                                     </View>
                                                     <View>
                                                         <View style={{ backgroundColor: 'red', padding: 5, bottom: 55, left: 0, position: 'absolute' }}>
-                                                            <Image style={{ height: 15, width: 25, borderRadius: 10 }}
+                                                            <FastImage  style={{ height: 15, width: 25, borderRadius: 10 }}
                                                                 source={require('../../Assets/Images/videoicon.png')} />
                                                         </View>
                                                         <Text numberOfLines={2} ellipsizeMode="tail"

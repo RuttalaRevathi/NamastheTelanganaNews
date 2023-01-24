@@ -168,8 +168,8 @@ const Home = ({
             layout="default"
             ref={isCarousel}
             autoplay={true}
-            autoplayDelay={100}
-            autoplayInterval={100}
+            // autoplayDelay={100}
+            // autoplayInterval={100}
             data={sliderData?.data}
             // loop={true}
             renderItem={({item, index}) => (
@@ -280,7 +280,7 @@ const Home = ({
                             detailsData: cartoonData?.data,
                           });
                         }}>
-                        <Image
+                        <FastImage
                           source={{ uri: item.web_featured_image }}
                           style={commonstyles.cartoonimg}
                         />
@@ -333,9 +333,9 @@ const Home = ({
         />
         {/* ap */}
         <HomeUI
-          categoryName="ఏపీ"
+          categoryName="ఆంధ్రప్రదేశ్"
           data={apData?.data}
-          navigationScreen="ఏపీ"
+          navigationScreen="ఆంధ్రప్రదేశ్"
           navigation={navigation}
         />
         {/* national */}
@@ -403,7 +403,7 @@ const Home = ({
                           );
                         }}>
                         <View style={commonstyles.sliderView}>
-                          <Image
+                          <FastImage
                             source={{ uri: item.web_featured_image }}
                             style={commonstyles.photocard}
                           />
@@ -477,7 +477,7 @@ const Home = ({
                                 alignSelf: 'center',
                                 marginVertical: 100,
                               }}>
-                              <Image
+                              <FastImage
                                 style={{ width: 30, height: 20 }}
                                 source={require('../Assets/Images/videoicon.png')}
                               />

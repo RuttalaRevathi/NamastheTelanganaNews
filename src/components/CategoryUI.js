@@ -60,7 +60,7 @@ function CategoryUI(props, { navigation }) {
                       });
                     }}>
                     <View style={commonstyles.sliderView}>
-                      <FastImage
+                      <Image
                         source={{ uri: item?.web_featured_image }}
                         style={commonstyles.slidercard}
                       />
@@ -98,6 +98,7 @@ function CategoryUI(props, { navigation }) {
                           style={commonstyles.cateImage}
                         />
                       </View>
+                                           {/* https://d2e1hu1ktur9ur.cloudfront.net/wp-content/uploads/2022/03/watermarklogo.jpg */}
                       <View style={commonstyles.cateviewText}>
                         <Text
                           numberOfLines={2}

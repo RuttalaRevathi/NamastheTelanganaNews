@@ -16,12 +16,12 @@ import SubHeader from '../components/SubHeader';
 import LinearGradient from 'react-native-linear-gradient';
 import moment from 'moment';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
+import {Card } from 'react-native-paper';
 
 
 
 function HomeUI(props, { navigation }) {
   useEffect(() => {
-    // console.log(props.data,"categorydata");            
   })
 
   return (
@@ -90,6 +90,7 @@ function HomeUI(props, { navigation }) {
                          props.navigation.navigate('Details', { item: item,detailsData:props?.data });
                        }}>
                         <View style={commonstyles.cardViewHome}>
+                        {/* <Card style={commonstyles.cardViewHome}> */}
                           <View style={commonstyles.cateviewImg}>
                             <FastImage
                               source={{ uri: item?.web_featured_image , cache: FastImage.cacheControl.immutable}}
@@ -114,6 +115,7 @@ function HomeUI(props, { navigation }) {
                               </Text>
                             </View>
                           </View>
+                          {/* </Card> */}
                         </View>
                       </TouchableOpacity>
                     </View>

@@ -12,6 +12,7 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
+import FastImage from 'react-native-fast-image';
 import SubHeader from '../../components/SubHeader';
 import getPhotoGalleryAction from '../../redux/actions/getPhotoGalleryAction';
 import {commonstyles} from '../../styles/commonstyles';
@@ -28,7 +29,6 @@ const PhotoGallery = ({
     dispatch(getPhotoGalleryAction());
   }, []);
   // share function
-  console.log('photosData', photosData?.data);
   return (
     <SafeAreaView styles={commonstyles.container}>
       <SubHeader
@@ -63,7 +63,7 @@ const PhotoGallery = ({
                       <View style={commonstyles.latestMainView}>
                         <View style={commonstyles.latestsubView}>
                           <View>
-                            <Image
+                            <FastImage 
                               style={commonstyles.latestimgTag}
                               source={{uri: item.web_featured_image}}
                             />

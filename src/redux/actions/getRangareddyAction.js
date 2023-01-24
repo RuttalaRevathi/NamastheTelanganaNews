@@ -19,6 +19,8 @@ export const getRangareddyAction = () => {
       });
       const json = await result.json();
       if (json) {
+        console.log(json,"result=================@@@@@@@@@@@@@@@@@@@@@@@@2 in Rangareddy Action");
+
         dispatch({
           type: GET_RANGAREDDY_SUCCESS,
           payload: json,
