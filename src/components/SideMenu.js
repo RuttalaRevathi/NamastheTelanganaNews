@@ -45,20 +45,7 @@ export default class SideMenu extends Component {
                         </View>
                     </View>
                     <ScrollView style={{ paddingBottom: 50 }}>
-                        {/* <DrawerItem
-                            style={sideMenuStyle.item}
-                            icon={({ color, size }) => (
-                                <FastImage
-                                    source={require('../Assets/Images/home.png')}
-                                    style={sideMenuStyle.icon}
-                                />
-                            )}
-                            label="హోమ్"
-                            labelStyle={sideMenuStyle.text}
-                            onPress={() => {
-                                this.props.navigation.navigate('BottomTab');
-                            }}
-                        /> */}
+                       
                         <DrawerItem
                             style={sideMenuStyle.item}
                             icon={({ color, size }) => (
