@@ -18,7 +18,6 @@ export const getKhammamAction = () => {
         },
       });
       const json = await result.json();
-      console.log(result,"result=================Khammammmmmmmmmmmmm");
       if (json) {
         dispatch({
           type: GET_KHAMMAM_SUCCESS,

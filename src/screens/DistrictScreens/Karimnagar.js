@@ -11,15 +11,8 @@ const KarimnagarScreen = ({
     karimnagarLoading,
     route,
 }: Props) => {
-    // karimnagarData = useSelector(state => state.karimnagarReducer.karimnagarData);
 
-    const dispatch = useDispatch();
-
-    useEffect(() => {
-        dispatch(getKarimnagarAction());
-
-    }, []);
-    console.log(karimnagarData,"==========================karimnagarData in screen");
+    karimnagarData = useSelector(state => state?.karimnagarReducer?.karimnagarData);
 
     return (
         <CategoryUI
@@ -35,12 +28,6 @@ type Props = {
     karimnagarData: Function,
     karimnagarLoading: Boolean,
 };
-const mapStateToProps = state => ({
-    karimnagarData: state.karimnagarReducer?.karimnagarData,
-    karimnagarLoading: state.karimnagarReducer?.karimnagarLoading,
-});
-const mapDispatchToProps = {
-    getKarimnagarAction,
-};
 
-export default connect(mapStateToProps, mapDispatchToProps)(KarimnagarScreen);
+
+export default KarimnagarScreen;

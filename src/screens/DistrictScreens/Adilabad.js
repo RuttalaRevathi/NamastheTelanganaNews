@@ -16,7 +16,6 @@ const AdilabadScreen = ({
 
     useEffect(() => {
         dispatch(getAdilabadAction());
-console.log(adilabadData,"=======================>adilabad data");
     }, []);
 
 

@@ -429,10 +429,10 @@ export default class SideMenu extends Component {
                             <DrawerItem
                                 style={sideMenuStyle.item}
 
-                                label="మెహబూబ్ నగర్"
+                                label="మహబూబ్ నగర్"
                                 labelStyle={sideMenuStyle.Disttext}
                                 onPress={() => {
-                                    this.props.navigation.navigate('మెహబూబ్ నగర్');
+                                    this.props.navigation.navigate('మహబూబ్ నగర్');
                                 }}
                             />
                         )}
@@ -535,25 +535,12 @@ export default class SideMenu extends Component {
                                 this.props.navigation.navigate('Privacy');
                             }}
                         />
-                        {/* <DrawerItem style={[sideMenuStyle.item,{paddingBottom:40}]}
-                            icon={({ color, size }) =>
-                                <FastImage source={require('../Assets/Images/sidemenuIcons/conditions.png')} style={sideMenuStyle.icon} />
-                            }
-                            label="Terms and Conditions"
-                            labelStyle={sideMenuStyle.text}
-                            onPress={() => {
-                                this.props.navigation.navigate("Terms")
-                            }}
-                        /> */}
+                       
                         <DrawerItem style={[sideMenuStyle.item]}
                             icon={({ color, size }) =>
                                 <FastImage source={require('../Assets/Images/sidemenuIcons/conditions.png')} style={sideMenuStyle.icon} />
                             }
-                            // label={({ focused, color }) => (
-                            //     <Text style={{color: appThemeColor,
-                            //         fontFamily: 'Mandali-Regular',
-                            //         fontSize: 16,}}>Terms & Conditions</Text>
-                            // )}
+                           
                             label="Terms and Conditions"
 
                             labelStyle={[sideMenuStyle.text]}

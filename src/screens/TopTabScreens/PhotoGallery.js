@@ -15,7 +15,7 @@ import {
 import FastImage from 'react-native-fast-image';
 import SubHeader from '../../components/SubHeader';
 import getPhotoGalleryAction from '../../redux/actions/getPhotoGalleryAction';
-import {commonstyles} from '../../styles/commonstyles';
+import {appThemeColor, commonstyles} from '../../styles/commonstyles';
 
 const PhotoGallery = ({
   navigation,
@@ -46,6 +46,7 @@ const PhotoGallery = ({
       />
       <ScrollView>
         <View>
+        {photosData?.data?.length !== 0 ?
           <View>
             <FlatList
               style={commonstyles.cateflist}
@@ -84,6 +85,12 @@ const PhotoGallery = ({
               )}
             />
           </View>
+          :
+            <View style={commonstyles.spinnerView}>
+              <ActivityIndicator color={appThemeColor} size='large' />
+              <Text style={commonstyles.spinnerText}>. . . Loading . . .</Text>
+            </View>
+          }
         </View>
       </ScrollView>
 

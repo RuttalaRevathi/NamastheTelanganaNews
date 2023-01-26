@@ -1,11 +1,11 @@
 /* eslint-disable prettier/prettier */
-import React, {useEffect, useRef, useState} from 'react';
-import {useDispatch, connect, useSelector} from 'react-redux';
+import React, { useEffect, useRef, useState } from 'react';
+import { useDispatch, connect, useSelector } from 'react-redux';
 import FastImage from 'react-native-fast-image';
-import Carousel, {Pagination} from 'react-native-snap-carousel';
+import Carousel, { Pagination } from 'react-native-snap-carousel';
 import Spinner from 'react-native-loading-spinner-overlay';
 import Swiper from 'react-native-web-swiper';
-import {SwiperFlatList} from 'react-native-swiper-flatlist';
+import { SwiperFlatList } from 'react-native-swiper-flatlist';
 import {
   View,
   Text,
@@ -28,6 +28,10 @@ import {
 import LinearGradient from 'react-native-linear-gradient';
 import HomeUI from '../components/HomeUI';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
+import HomeCarouselItem from '../components/HomeCarouselItem';
+import HomeCartoonItem from '../components/HomeCartoonItem';
+import HomePhotogalleryItem from '../components/HomePhotogalleryItem';
+import HomeVideosgalleryItem from '../components/HomeVideosgalleryItem';
 
 const Home = ({
   navigation,
@@ -149,10 +153,46 @@ const Home = ({
   //   'slider data=============================================>',
   //   JSON.stringify(sliderData),
   // );
+  const carouselItem = ({ item, index }) => (
+    <HomeCarouselItem
+      item={item}
+      propsdata={sliderData?.data}
+      navigation={navigation}
+      index={index}
+
+    />
+  );
+  const cartoonItem = ({ item, index }) => (
+    <HomeCartoonItem
+      item={item}
+      propsdata={cartoonData?.data}
+      navigation={navigation}
+      index={index}
+
+    />
+  );
+  const photoGalleryItem = ({ item, index }) => (
+    <HomePhotogalleryItem
+      item={item}
+      propsdata={photosData?.data}
+      navigation={navigation}
+      index={index}
+    />
+  );
+
+  const videoGalleryitem = ({ item, index }) => (
+    <HomeVideosgalleryItem
+      item={item}
+      propsdata={videosData?.data}
+      navigation={navigation}
+      index={index}
+    />
+  );
+
 
   return (
     <ScrollView>
-      <View style={{padding: 10}}>
+      <View style={{ padding: 10 }}>
         {/* Spinner */}
         <Spinner
           //visibility of Overlay Loading Spinner
@@ -160,7 +200,7 @@ const Home = ({
           //Text with the Spinner
           textContent={'Loading...'}
           //Text style of the Spinner Text
-          textStyle={{color: '#FFF'}}
+          textStyle={{ color: '#FFF' }}
         />
         {/* Slider */}
         <View>
@@ -171,51 +211,8 @@ const Home = ({
             // autoplayDelay={100}
             // autoplayInterval={100}
             data={sliderData?.data}
+            renderItem={carouselItem}
             // loop={true}
-            renderItem={({item, index}) => (
-              <TouchableOpacity
-                onPress={() => {
-                  navigation.navigate('Details', {
-                    item: item,
-                    detailsData: sliderData?.data,
-                  });
-                }}>
-                <View style={commonstyles.sliderView} key={index}>
-                  <FastImage
-                    source={{uri: item.web_featured_image}}
-                    style={commonstyles.slidercard}
-                  />
-                  <View
-                    style={{
-                      position: 'absolute',
-                      top: 0,
-                      left: 0,
-                      right: 0,
-                      bottom: 0,
-                    }}>
-                    <Text
-                      style={{
-                        color: '#FFFFFF',
-                        fontSize: 18,
-                        fontFamily: 'Mandali-Bold',
-                      }}>
-                      {index + 1}/{sliderData?.data?.length}
-                    </Text>
-                  </View>
-                  <LinearGradient
-                    colors={[
-                      'rgba(0,0,0,0)',
-                      'rgba(0,0,0,.8)',
-                      'rgba(0,0,0,1)',
-                    ]}
-                    style={commonstyles.sliderGradient}>
-                    <Text style={commonstyles.slidertext}>
-                      {item.title.rendered}
-                    </Text>
-                  </LinearGradient>
-                </View>
-              </TouchableOpacity>
-            )}
             sliderWidth={SLIDER_WIDTH}
             itemWidth={ITEM_WIDTH}
             onSnapToItem={index => setIndex(index)}
@@ -224,14 +221,16 @@ const Home = ({
           <Pagination
             style={commonstyles.pagination}
             carouselRef={isCarousel}
-            dotStyle={{display: 'none'}}
+            dotStyle={{ display: 'none' }}
             enableMomentum={true}
           />
         </View>
         {/* LatestNews */}
         <HomeUI
           categoryName="తాజావార్తలు"
-          data={latestNews?.data}
+          data={latestNews?.data?.filter(obj => {
+            return obj.format === 'standard';
+          })}
           navigationScreen="LatestNews"
           navigation={navigation}
         />
@@ -270,32 +269,7 @@ const Home = ({
                 data={cartoonData?.data}
                 showsHorizontalScrollIndicator={true}
                 horizontal={true}
-                renderItem={({ item, index }) => (
-                  <View style={{ flex: 1 }}>
-                    <View style={commonstyles.CartoonCard}>
-                      <TouchableOpacity
-                        onPress={() => {
-                          navigation.navigate('CartoonArticle', {
-                            item: item,
-                            detailsData: cartoonData?.data,
-                          });
-                        }}>
-                        <FastImage
-                          source={{ uri: item.web_featured_image }}
-                          style={commonstyles.cartoonimg}
-                        />
-                        <View>
-                          <Text
-                            numberOfLines={2}
-                            ellipsizeMode="tail"
-                            style={commonstyles.SportText}>
-                            {item.title.rendered}
-                          </Text>
-                        </View>
-                      </TouchableOpacity>
-                    </View>
-                  </View>
-                )}
+                renderItem={cartoonItem}
               />
               {/* more text */}
               <View style={commonstyles.moreview}>
@@ -373,8 +347,8 @@ const Home = ({
           navigationScreen="ఎన్‌ఆర్‌ఐ"
           navigation={navigation}
         />
-          {/* Photo Gallery */}
-          <View>
+        {/* Photo Gallery */}
+        <View>
           {/*photo gallery  text*/}
 
           <View style={commonstyles.photoview}>
@@ -390,39 +364,7 @@ const Home = ({
                   data={photosData?.data}
                   showsHorizontalScrollIndicator={false}
                   horizontal={true}
-                  renderItem={({ item, index }) => (
-                    <View style={{ marginRight: 5, marginLeft: 10 }}>
-                      <TouchableOpacity
-                        onPress={() => {
-                          navigation.navigate(
-                            'PhotoArticle',
-                            {
-                              item: item,
-                              detailsData: photosData?.data,
-                            },
-                          );
-                        }}>
-                        <View style={commonstyles.sliderView}>
-                          <FastImage
-                            source={{ uri: item.web_featured_image }}
-                            style={commonstyles.photocard}
-                          />
-                          <LinearGradient
-                            colors={['transparent', 'white']}
-                            style={commonstyles.linearGradient}
-                            start={{ x: 0.5, y: 0.2 }}
-                            locations={[0.2, 0.8]}>
-                            <Text
-                              numberOfLines={2}
-                              ellipsizeMode="tail"
-                              style={commonstyles.phototext}>
-                              {item.title.rendered}
-                            </Text>
-                          </LinearGradient>
-                        </View>
-                      </TouchableOpacity>
-                    </View>
-                  )}
+                  renderItem={photoGalleryItem}
                 />
               </View>
 
@@ -456,49 +398,7 @@ const Home = ({
                   data={videosData?.data}
                   showsHorizontalScrollIndicator={false}
                   horizontal={true}
-                  renderItem={({ item, index }) => (
-                    <View style={{ marginRight: 5, marginLeft: 10 }}>
-                      <TouchableOpacity
-                        onPress={() => {
-                          navigation.navigate('VideoArticle', {
-                            item: item,
-                            detailsData: videosData?.data,
-                          });
-                        }}>
-                        <View style={commonstyles.sliderView}>
-                          <ImageBackground
-                            imageStyle={{ borderRadius: 6 }}
-                            source={{ uri: item.web_featured_image }}
-                            style={commonstyles.videocard}>
-                            <View
-                              style={{
-                                justifyContent: 'center',
-                                alignContent: 'center',
-                                alignSelf: 'center',
-                                marginVertical: 100,
-                              }}>
-                              <FastImage
-                                style={{ width: 30, height: 20 }}
-                                source={require('../Assets/Images/videoicon.png')}
-                              />
-                            </View>
-                          </ImageBackground>
-                          <LinearGradient
-                            colors={['transparent', 'white']}
-                            style={commonstyles.linearGradient}
-                            start={{ x: 0.5, y: 0.2 }}
-                            locations={[0.2, 0.8]}>
-                            <Text
-                              numberOfLines={2}
-                              ellipsizeMode="tail"
-                              style={commonstyles.phototext}>
-                              {item.title.rendered}
-                            </Text>
-                          </LinearGradient>
-                        </View>
-                      </TouchableOpacity>
-                    </View>
-                  )}
+                  renderItem={videoGalleryitem}
                 />
 
               </View>
@@ -522,7 +422,7 @@ const Home = ({
           navigationScreen="ఎడిట్‌ పేజీ"
           navigation={navigation}
         />
-       
+
         {/* Zindagi */}
         <HomeUI
           categoryName="జిందగీ"

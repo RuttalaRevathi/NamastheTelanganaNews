@@ -25,14 +25,14 @@ import cookingReducer from '../redux/reducers/cookingReducer';
 import vaasthuReducer from '../redux/reducers/vaasthuReducer';
 import videoReducer from '../redux/reducers/videoReducer';
 import adilabadReducer from '../redux/reducers/adilabadReducer';
-import karimnagarReducer from '../redux/reducers/districtsReducer';
-import khammamReducer from '../redux/reducers/districtsReducer';
-import mahabubnagarReducer from '../redux/reducers/districtsReducer';
-import medakReducer from '../redux/reducers/districtsReducer';
-import nalgondaReducer from '../redux/reducers/districtsReducer';
-import nizamabadReducer from '../redux/reducers/districtsReducer';
-import rangareddyReducer from '../redux/reducers/districtsReducer';
-import warangalReducer from '../redux/reducers/districtsReducer';
+import karimnagarReducer from '../redux/reducers/karimnagarReducer';
+import khammamReducer from '../redux/reducers/khammamReducer';
+import mahabubnagarReducer from '../redux/reducers/mahabubnagarReducer';
+import medakReducer from '../redux/reducers/medakReducer';
+import nalgondaReducer from '../redux/reducers/nalgondaReducer';
+import nizamabadReducer from '../redux/reducers/nizamabadReducer';
+import rangareddyReducer from '../redux/reducers/rangareddyReducer';
+import warangalReducer from '../redux/reducers/warangalReducer';
 import articleDetailReducer from '../redux/reducers/articleDetailReducer';
 
 

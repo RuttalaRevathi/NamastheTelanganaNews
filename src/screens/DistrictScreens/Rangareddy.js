@@ -1,6 +1,6 @@
 /* eslint-disable prettier/prettier */
 import React, { useEffect } from 'react';
-import { useDispatch, connect } from 'react-redux';
+import { useDispatch, connect, useSelector } from 'react-redux';
 import CategoryUI from '../../components/CategoryUI';
 import { getRangareddyAction } from '../../redux/actions/getRangareddyAction';
 
@@ -11,18 +11,8 @@ const RangareddyScreen = ({
     rangareddyLoading,
     route,
 }: Props) => {
-
-    const dispatch = useDispatch();
-
-    useEffect(() => {
-        dispatch(getRangareddyAction());
-
-    }, []);
-    // console.log(
-        
-    //     JSON.stringify(rangareddyData),'rangareddy data=============================================>',
-    //   );
-
+    rangareddyData = useSelector(state => state?.rangareddyReducer?.rangareddyData);
+   
     return (
         <CategoryUI
         data = {rangareddyData}
@@ -37,12 +27,6 @@ type Props = {
     rangareddyData: Function,
     rangareddyLoading: Boolean,
 };
-const mapStateToProps = state => ({
-    rangareddyData: state.rangareddyReducer?.rangareddyData,
-    rangareddyLoading: state.rangareddyReducer?.rangareddyLoading,
-});
-const mapDispatchToProps = {
-    getRangareddyAction,
-};
 
-export default connect(mapStateToProps, mapDispatchToProps)(RangareddyScreen);
+
+export default RangareddyScreen;

@@ -9,13 +9,16 @@ import {
   ScrollView,
   SafeAreaView,
   Share,
+  ActivityIndicator,
 } from 'react-native';
-import { commonstyles } from '../styles/commonstyles';
+import { appThemeColor, commonstyles } from '../styles/commonstyles';
 import SubHeader from '../components/SubHeader';
 import LinearGradient from 'react-native-linear-gradient';
 import moment from 'moment';
 import { ShareUrl } from '../utilities/urls';
 import FastImage from 'react-native-fast-image';
+import CategoryComponentOne from './CategoryComponentOne';
+import CategoryComponentTwo from './CategoryComponentTwo';
 
 const sharecall = (name) => {
   const Link_Url = ShareUrl + name;
@@ -29,6 +32,22 @@ function CategoryUI(props, { navigation }) {
   useEffect(() => {
     // console.log(props.data,"categorydata");            
   })
+  const renderItemOne = ({item}) => (
+    <CategoryComponentOne
+         item={item}
+         propsdata={props.data?.data}
+         navigation={ props?.navigation}
+
+    />
+  );
+  const renderItemTwo = ({item}) => (
+    <CategoryComponentTwo
+         item={item}
+         propsdata={props.data?.data}
+         navigation={ props?.navigation}
+
+    />
+  );
 
   return (
     <SafeAreaView styles={commonstyles.container}>
@@ -37,7 +56,7 @@ function CategoryUI(props, { navigation }) {
         isMenu={false}
         isBook={false}
         isShare={true}
-        leftBtnClick={() => props.navigation.goBack()}
+        leftBtnClick={() => props?.navigation.goBack()}
         ShareClick={() => {
           sharecall(props.categoryName);
         }}
@@ -47,92 +66,29 @@ function CategoryUI(props, { navigation }) {
       />
       <ScrollView>
         <View>
+          {props?.data?.length !== 0 ?
           <View style={{ position: 'relative' }}>
             <FlatList
               showsHorizontalScrollIndicator={false}
               data={props.data?.data?.slice(0, 1)}
-              renderItem={({ item, index }) => (
-                <View style={{ marginRight: 5, marginLeft: 5, marginTop: 10 }}>
-                  <TouchableOpacity
-                    onPress={() => {
-                      props.navigation.navigate('Details', {
-                        item: item,detailsData:props.data?.data
-                      });
-                    }}>
-                    <View style={commonstyles.sliderView}>
-                      <Image
-                        source={{ uri: item?.web_featured_image }}
-                        style={commonstyles.slidercard}
-                      />
-                      <LinearGradient
-                        colors={[
-                          'rgba(0,0,0,0)',
-                          'rgba(0,0,0,.8)',
-                          'rgba(0,0,0,1)',
-                        ]}
-                        style={commonstyles.sliderGradient}>
-                        <Text style={commonstyles.slidertext}>
-                          {item?.title?.rendered}
-                        </Text>
-                      </LinearGradient>
-                    </View>
-                  </TouchableOpacity>
-                </View>
-              )}
+              renderItem={renderItemOne}
             />
             <FlatList
               style={commonstyles.cateflist}
               data={props.data?.data?.slice(1, -1)}
-              renderItem={({ item, index }) => (
-                <View>
-                  <TouchableOpacity
-                   onPress={() => {
-                    props.navigation.navigate('Details', {
-                      item: item,detailsData:props.data?.data
-                    });
-                  }}>
-                    <View style={commonstyles.cardView}>
-                      <View style={commonstyles.cateviewImg}>
-                        <Image
-                          source={{ uri: item?.web_featured_image }}
-                          style={commonstyles.cateImage}
-                        />
-                      </View>
-                                           {/* https://d2e1hu1ktur9ur.cloudfront.net/wp-content/uploads/2022/03/watermarklogo.jpg */}
-                      <View style={commonstyles.cateviewText}>
-                        <Text
-                          numberOfLines={2}
-                          ellipsizeMode="tail"
-                          style={commonstyles.latestText}>
-                          {item?.title?.rendered}
-                        </Text>
-                        <View style={commonstyles.timeview}>
-                          <Text style={commonstyles.latesttime}>
-                            {moment(item?.date_gmt).format('DD-MMM-YYYY')} ,{' '}
-                          </Text>
-                          <Text style={commonstyles.latesttime}>
-                            {moment(item?.modified)
-                              .utcOffset('+05:30')
-                              .format('hh.mm a')}{' '}
-                          </Text>
-                        </View>
-                      </View>
-                    </View>
-                  </TouchableOpacity>
-                </View>
-              )}
+              renderItem={renderItemTwo}
             />
           </View>
+          :
+            <View style={commonstyles.spinnerView}>
+              <ActivityIndicator color={appThemeColor} size='large' />
+              <Text style={commonstyles.spinnerText}>. . . Loading . . .</Text>
+            </View>
+          }
         </View>
       </ScrollView>
 
-      {/* {
-            this.state.isLoading == false &&
-
-            <View style={commonstyles.loading}>
-                <ActivityIndicator color={appThemeColor} size='large' />
-            </View>
-        } */}
+    
     </SafeAreaView>
   );
 };

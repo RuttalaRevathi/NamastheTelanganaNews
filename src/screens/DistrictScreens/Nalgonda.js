@@ -1,6 +1,6 @@
 /* eslint-disable prettier/prettier */
 import React, { useEffect } from 'react';
-import { useDispatch, connect } from 'react-redux';
+import { useDispatch, connect, useSelector } from 'react-redux';
 import CategoryUI from '../../components/CategoryUI';
 import { getNalgondaAction } from '../../redux/actions/getNalgondaAction';
 
@@ -11,13 +11,7 @@ const NalgondaScreen = ({
     nalgondaLoading,
     route,
 }: Props) => {
-
-    const dispatch = useDispatch();
-
-    useEffect(() => {
-        dispatch(getNalgondaAction());
-
-    }, []);
+    nalgondaData = useSelector(state => state?.nalgondaReducer?.nalgondaData);
 
     return (
         <CategoryUI
@@ -33,12 +27,6 @@ type Props = {
     nalgondaData: Function,
     nalgondaLoading: Boolean,
 };
-const mapStateToProps = state => ({
-    nalgondaData: state.nalgondareducer?.nalgondaData,
-    nalgondaLoading: state.nalgondareducer?.nalgondaLoading,
-});
-const mapDispatchToProps = {
-    getNalgondaAction,
-};
 
-export default connect(mapStateToProps, mapDispatchToProps)(NalgondaScreen);
+
+export default NalgondaScreen;

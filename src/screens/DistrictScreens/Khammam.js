@@ -1,6 +1,6 @@
 /* eslint-disable prettier/prettier */
 import React, { useEffect } from 'react';
-import { useDispatch, connect } from 'react-redux';
+import { useDispatch, connect, useSelector } from 'react-redux';
 import CategoryUI from '../../components/CategoryUI';
 import { getKhammamAction } from '../../redux/actions/getKhammamAction';
 
@@ -12,13 +12,7 @@ const KhammamScreen = ({
     route,
 }: Props) => {
 
-    const dispatch = useDispatch();
-
-    useEffect(() => {
-        dispatch(getKhammamAction());
-
-    }, []);
-    
+    khammamData = useSelector(state => state?.khammamReducer?.khammamData);
 
     return (
         <CategoryUI
@@ -34,12 +28,7 @@ type Props = {
     khammamData: Function,
     khammamLoading: Boolean,
 };
-const mapStateToProps = state => ({
-    khammamData: state.khammamReducer?.khammamData,
-    khammamLoading: state.khammamReducer?.khammamLoading,
-});
-const mapDispatchToProps = {
-    getKhammamAction,
-};
 
-export default connect(mapStateToProps, mapDispatchToProps)(KhammamScreen);
+
+
+export default KhammamScreen;

@@ -41,7 +41,7 @@ const HomeStackNavigator = () => {
       <Stack.Screen name="ఆదిలాబాద్" component={Adilabad} />
       <Stack.Screen name="కరీంనగర్‌" component={Karimnagar} />
       <Stack.Screen name="ఖమ్మం" component={Khammam} />
-      <Stack.Screen name="మెహబూబ్ నగర్" component={Mahabubnagar} />
+      <Stack.Screen name="మహబూబ్ నగర్" component={Mahabubnagar} />
       <Stack.Screen name="మెదక్" component={Medak} />
       <Stack.Screen name="నల్గొండ" component={Nalgonda} />
       <Stack.Screen name="నిజామాబాద్" component={Nizamabad} />

@@ -21,7 +21,7 @@ export const articleDetails = 'article-data-by-id-api';
 // Category Urls
 export const Adilabad = 'adilabad';
 export const Karimnagar = 'karimnagar';
-export const Khammam = 'kammam';
+export const Khammam = 'khammam';
 export const Mahabubnagar = 'mahabubnagar';
 export const Medak = 'medak';
 export const Nalgonda = 'nalgonda';

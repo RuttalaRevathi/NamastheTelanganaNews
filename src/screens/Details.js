@@ -14,6 +14,9 @@ import moment from 'moment';
 import { connect, useDispatch } from 'react-redux';
 import getRelatedAction from '../redux/actions/getRelatedAction';
 import getArticleDetailAction from '../redux/actions/getArticleDetailAction';
+import HomeComponentTwo from '../components/HomeComponentTwo';
+import DetailsComponentTwo from '../components/DetailsComponentTwo';
+import DetailsComponentThree from '../components/DetailsComponentThree';
 // import Image from 'react-native-fast-image';
 const screenWidth = Dimensions.get('window').width;
 
@@ -38,7 +41,7 @@ const Details = ({ navigation, relatedData, relatedLoading,
 
   useEffect(() => {
     goToTop();
-  }, []);
+  });
   const Scrollref = useRef();
 
   const goToTop = () => {
@@ -58,6 +61,32 @@ const Details = ({ navigation, relatedData, relatedLoading,
 
   const source = route?.params?.item?.content?.rendered;
   var source1 = source?.replace('lazyload', 'text/javascript');
+  const renderItemOne = ({item}) => (
+    <HomeComponentTwo
+         item={item}
+         propsdata={relatedData?.data}
+         navigation={ navigation}
+
+    />
+  );
+  const renderItemTwo = ({item}) => (
+    <DetailsComponentTwo
+         item={item}
+         propsdata={relatedData?.data}
+         navigation={ navigation}
+
+    />
+  );
+  const renderItemThree = ({item}) => (
+    <DetailsComponentThree
+         item={item}
+         propsdata={relatedData?.data}
+         navigation={ navigation}
+
+    />
+  );
+
+  
   return (
     <View style={commonstyles.container}>
       <View>
@@ -227,45 +256,7 @@ const Details = ({ navigation, relatedData, relatedLoading,
                   showsHorizontalScrollIndicator={false}
                   persistentScrollbar={false}
                   data={relatedData?.data}
-                  renderItem={({ item, index }) => (
-                    <View>
-                      <TouchableOpacity
-                        onPress={() => {
-                          navigation.navigate('Details', {
-                            item: item,
-                            // DetailsData: relatedData,
-                          });
-                        }}>
-                        <View style={commonstyles.cardView}>
-                          <View style={commonstyles.cateviewImg}>
-                            <Image
-                              source={{ uri: item?.web_featured_image }}
-                              style={commonstyles.cateImage}
-                            />
-                          </View>
-                          <View style={commonstyles.cateviewText}>
-                            <Text
-                              numberOfLines={2}
-                              ellipsizeMode="tail"
-                              style={commonstyles.latestText}>
-                              {item?.title?.rendered}
-                            </Text>
-                            <View style={commonstyles.timeview}>
-                              <Text style={commonstyles.latesttime}>
-                                {moment(item?.date_gmt).format('DD-MMM-YYYY')}{' '}
-                                ,{' '}
-                              </Text>
-                              <Text style={commonstyles.latesttime}>
-                                {moment(item?.modified)
-                                  .utcOffset('+05:30')
-                                  .format('hh.mm a')}{' '}
-                              </Text>
-                            </View>
-                          </View>
-                        </View>
-                      </TouchableOpacity>
-                    </View>
-                  )}
+                  renderItem={renderItemOne}
                 />
 
               </View>
@@ -286,125 +277,7 @@ const Details = ({ navigation, relatedData, relatedLoading,
                 getIndex() + 10,
 
               )}
-              renderItem={({ item, index }) => (
-                <View>
-                  <View
-                    style={{
-                      padding: 10,
-                      flexDirection: 'row',
-                      justifyContent: 'space-between',
-                      // borderBottomColor:appThemeColor,
-                      // borderBottomWidth:1,marginLeft:5,marginRight:5,
-                    }}>
-                    <View>
-                      <View style={{ flexDirection: 'row' }}>
-                        <Feather
-                          name="chevrons-down"
-                          size={25}
-                          color={appThemeColor}
-                          style={{ marginTop: 3 }}
-                        />
-
-                        <Text style={commonstyles.nextText}>
-                          Next Article
-                        </Text>
-                      </View>
-                    </View>
-                    <View >
-                      <TouchableOpacity
-                        onPress={() => {
-                          Share.share({
-                            message: item.link,
-                          });
-                        }}>
-                        <MaterialIcons
-                          name="share"
-                          size={20}
-                          color={appThemeColor}
-                          style={{ top: 3 }}
-                        />
-                      </TouchableOpacity>
-                    </View>
-                  </View>
-                  <View>
-                    <Image
-                      source={{ uri: item?.web_featured_image }}
-                      style={commonstyles.Detailslargecard}
-                    />
-                  </View>
-
-                  <View style={{ margin: 10 }}>
-                    <HTMLView
-                      value={'<p>' + item?.title?.rendered + '</p>'}
-                      stylesheet={headerStyles}
-                    />
-                  </View>
-
-                  <View style={{ flexDirection: 'row', start: 10 }}>
-                    <Text style={commonstyles.detailTime}>
-                      {moment(item?.date_gmt).format(
-                        'MMMM DD , YYYY',
-                      )}{' '}
-                      /{' '}
-                    </Text>
-                    <Text style={commonstyles.detailTime}>
-                      {moment(item?.modified)
-                        .utcOffset('+05:30')
-                        .format('hh.mm a')}{' '}
-                      IST{' '}
-                    </Text>
-                  </View>
-
-                  <View
-                    style={{
-                      width: screenWidth - 10,
-                      justifyContent: 'center',
-                      pointerEvents: 'none',
-                      paddingLeft: 10,
-                    }}>
-                    <AutoHeightWebView
-                      androidHardwareAccelerationDisabled // update here androidLayerType="software"
-                      customStyle={`
-                              * {
-                                font-family: 'Mandali-Bold';
-                                line-height: 1.5;
-                                -webkit-user-select: none;
-                                  -webkit-touch-callout: none; 
-                                 }
-                              p {
-                                font-size: 16px;
-                                text-align:left;
-                              padding: 0px 15px;
-                                font-family:'Mandali-Regular';
-                                line-height:35px
-                                                              }
-                                                              p img{
-                                                                width:100%;
-                                                                height:inherit
-                                                              }
-                                                              p iframe{
-                                                                width:100%;
-                                                                height:inherit
-                                                              }
-                                                              img{
-                                                                width:100%;
-                                                                height:inherit
-                                                              }
-                                                                                                                          
-                            `}
-                      source={{
-                        html: (item.content.rendered +=
-                          "<style>@import url('https://fonts.googleapis.com/css2?family=Mandali&display=swap');p strong, span, p span{font-family: 'Mandali', sans-serif;}p,li{font-family: 'Mandali', sans-serif;line-height:1.6;color:#000;font-weight:500;font-size:18px}</style>"),
-                        baseUrl: 'https://twitter.com',
-                      }}
-                      scalesPageToFit={false}
-                      viewportContent={
-                        'width=device-width, user-scalable=no'
-                      }
-                    />
-                  </View>
-                </View>
-              )}
+              renderItem={renderItemTwo}
             />
           </View>
           {/* Flash News */}
@@ -420,35 +293,7 @@ const Details = ({ navigation, relatedData, relatedLoading,
                     data={latestNews?.data}
                     showsHorizontalScrollIndicator={false}
                     horizontal={true}
-                    renderItem={({ item, index }) => (
-                      <View style={{ marginRight: 5, marginLeft: 10 }}>
-                        <TouchableOpacity
-                          onPress={() => {
-                            navigation.navigate('Details', {
-                              item: item,
-                            });
-                          }}>
-                          <View style={commonstyles.sliderView}>
-                            <Image
-                              source={{ uri: item.web_featured_image }}
-                              style={commonstyles.photocard}
-                            />
-                            <LinearGradient
-                              colors={['transparent', 'black']}
-                              style={commonstyles.linearGradient}
-                              start={{ x: 0.5, y: 0.2 }}
-                              locations={[0.2, 0.8]}>
-                              <Text
-                                numberOfLines={2}
-                                ellipsizeMode="tail"
-                                style={commonstyles.flashtext}>
-                                {item.title.rendered}
-                              </Text>
-                            </LinearGradient>
-                          </View>
-                        </TouchableOpacity>
-                      </View>
-                    )}
+                    renderItem={renderItemThree}
                   />
                 </View>
               </View>

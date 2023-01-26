@@ -1,6 +1,6 @@
 /* eslint-disable prettier/prettier */
 import React, { useEffect } from 'react';
-import { useDispatch, connect } from 'react-redux';
+import { useDispatch, connect, useSelector } from 'react-redux';
 import CategoryUI from '../../components/CategoryUI';
 import { getMedakAction } from '../../redux/actions/getMedakAction';
 
@@ -11,13 +11,8 @@ const MedakScreen = ({
     medakLoading,
     route,
 }: Props) => {
-
-    const dispatch = useDispatch();
-
-    useEffect(() => {
-        dispatch(getMedakAction());
-
-    }, []);
+    medakData = useSelector(state => state?.medakReducer?.medakData);
+   
     return (
         <CategoryUI
         data = {medakData}
@@ -32,12 +27,6 @@ type Props = {
     medakData: Function,
     medakLoading: Boolean,
 };
-const mapStateToProps = state => ({
-    medakData: state.medakReducer?.medakData,
-    medakLoading: state.medakReducer?.medakLoading,
-});
-const mapDispatchToProps = {
-    getMedakAction,
-};
 
-export default connect(mapStateToProps, mapDispatchToProps)(MedakScreen);
+
+export default MedakScreen;

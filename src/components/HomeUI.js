@@ -17,13 +17,30 @@ import LinearGradient from 'react-native-linear-gradient';
 import moment from 'moment';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import {Card } from 'react-native-paper';
+import HomeComponentOne from '../components/HomeComponentOne';
+import HomeComponentTwo from './HomeComponentTwo';
 
 
 
 function HomeUI(props, { navigation }) {
   useEffect(() => {
-  })
+  });
+   const renderItemOne = ({item}) => (
+    <HomeComponentOne
+         item={item}
+         propsdata={props?.data}
+         navigation={ props?.navigation}
 
+    />
+  );
+  const renderItemTwo = ({item}) => (
+    <HomeComponentTwo
+         item={item}
+         propsdata={props?.data}
+         navigation={ props?.navigation}
+
+    />
+  );
   return (
     <SafeAreaView styles={commonstyles.container}>
       <View>
@@ -42,85 +59,30 @@ function HomeUI(props, { navigation }) {
           {/* flatlist for Latest News */}
           <View>
             <View style={commonstyles.flatView}>
-              <FlatList
-                style={commonstyles.bgDarkGrey}
-                showsHorizontalScrollIndicator={false}
-                persistentScrollbar={false}
-                numColumns={2}
-                data={props?.data?.slice(0, 2)}
-                renderItem={({ item, index }) => (
-                  <View>
-                    <View>
-                      <TouchableOpacity
-                        onPress={() => {
-                          props.navigation.navigate('Details', { item: item,detailsData:props?.data });
-                        }}>
-                        <View style={commonstyles.latestMainView}>
-                          <View style={commonstyles.latestsubView}>
-                            <View>
-                              <FastImage
-                                style={commonstyles.latestimgTag}
-                                source={{ uri: item?.web_featured_image, cache: FastImage.cacheControl.immutable}}
-                              />
-                            </View>
-                            <View>
-                              <Text
-                                numberOfLines={2}
-                                ellipsizeMode="tail"
-                                style={commonstyles.latestTxtTag}>
-                                {item?.title?.rendered}
-                              </Text>
-                            </View>
-                          </View>
-                        </View>
-                      </TouchableOpacity>
-                    </View>
-                  </View>
-                )}
-              />
+            <FlatList
+          data={props?.data?.slice(0, 2)}
+          showsHorizontalScrollIndicator={false}
+          persistentScrollbar={false}
+          numColumns={2}
+          onEndReachedThreshold={50}
+          getItemLayout={(data, index) => (
+            {length: 40, offset: 40 * index, index}
+          )}
+          renderItem={renderItemOne}
+        />
+
               <View >
-                <FlatList
-                  showsHorizontalScrollIndicator={false}
-                  persistentScrollbar={false}
-                  data={props?.data?.slice(2, 8)}
-                  renderItem={({ item, index }) => (
-                    <View>
-                      <TouchableOpacity
-                       onPress={() => {
-                         props.navigation.navigate('Details', { item: item,detailsData:props?.data });
-                       }}>
-                        <View style={commonstyles.cardViewHome}>
-                        {/* <Card style={commonstyles.cardViewHome}> */}
-                          <View style={commonstyles.cateviewImg}>
-                            <FastImage
-                              source={{ uri: item?.web_featured_image , cache: FastImage.cacheControl.immutable}}
-                              style={commonstyles.cateImage}
-                            />
-                          </View>
-                          <View style={commonstyles.cateviewText}>
-                            <Text
-                              numberOfLines={2}
-                              ellipsizeMode="tail"
-                              style={commonstyles.latestText}>
-                              {item?.title?.rendered}
-                            </Text>
-                            <View style={commonstyles.timeview}>
-                              <Text style={commonstyles.latesttime}>
-                                {moment(item?.date_gmt).format('DD-MMM-YYYY')} ,{' '}
-                              </Text>
-                              <Text style={commonstyles.latesttime}>
-                                {moment(item?.modified)
-                                  .utcOffset('+05:30')
-                                  .format('hh.mm a')}{' '}
-                              </Text>
-                            </View>
-                          </View>
-                          {/* </Card> */}
-                        </View>
-                      </TouchableOpacity>
-                    </View>
-                  )}
-                />
+              <FlatList
+         showsHorizontalScrollIndicator={false}
+         persistentScrollbar={false}
+         data={props?.data?.slice(2, 8)}
+          onEndReachedThreshold={50}
+          getItemLayout={(data, index) => (
+            {length: 40, offset: 40 * index, index}
+          )}
+          renderItem={renderItemTwo}
+        />
+
               </View>
             </View>
           </View>
@@ -138,5 +100,5 @@ function HomeUI(props, { navigation }) {
         </View>
     </SafeAreaView>
   );
-};
+}
 export default HomeUI;

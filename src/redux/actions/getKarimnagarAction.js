@@ -12,14 +12,13 @@ export const getKarimnagarAction = () => {
       dispatch({
         type: GET_KARIMNAGAR,
       });
-      const result = await fetch(BaseUrl + CategoryUrl + Sports, {
+      const result = await fetch(BaseUrl + CategoryUrl + Karimnagar, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
         },
       });
       const json = await result.json();
-      console.log(json,"result=================@@@@@@@@@@@@@@@@@@@@@@@@2 in karimnagar Action");
       if (json) {
         dispatch({
           type: GET_KARIMNAGAR_SUCCESS,

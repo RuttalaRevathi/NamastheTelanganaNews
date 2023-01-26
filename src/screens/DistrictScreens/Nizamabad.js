@@ -1,6 +1,6 @@
 /* eslint-disable prettier/prettier */
 import React, { useEffect } from 'react';
-import { useDispatch, connect } from 'react-redux';
+import { useDispatch, connect, useSelector } from 'react-redux';
 import CategoryUI from '../../components/CategoryUI';
 import { getNizamabadAction } from '../../redux/actions/getNizamabadAction';
 
@@ -12,12 +12,8 @@ const NizamabadScreen = ({
     route,
 }: Props) => {
 
-    const dispatch = useDispatch();
+    nizamabadData = useSelector(state => state?.nizamabadReducer?.nizamabadData);
 
-    useEffect(() => {
-        dispatch(getNizamabadAction());
-
-    }, []);
     // share function
 
     return (
@@ -34,12 +30,6 @@ type Props = {
     nizamabadData: Function,
     nizamabadLoading: Boolean,
 };
-const mapStateToProps = state => ({
-    nizamabadData: state.nizamabadReducer?.nizamabadData,
-    nizamabadLoading: state.nizamabadReducer?.nizamabadLoading,
-});
-const mapDispatchToProps = {
-    getNizamabadAction,
-};
 
-export default connect(mapStateToProps, mapDispatchToProps)(NizamabadScreen);
+
+export default NizamabadScreen;

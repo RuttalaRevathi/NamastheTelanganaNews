@@ -31,6 +31,13 @@ import getVaasthuAction from './src/redux/actions/getVaasthuAction';
 import getVideoAction from './src/redux/actions/getVideoAction';
 import getPhotoGalleryAction from './src/redux/actions/getPhotoGalleryAction';
 import { getKarimnagarAction } from './src/redux/actions/getKarimnagarAction';
+import { getKhammamAction } from './src/redux/actions/getKhammamAction';
+import { getMahabubnagarAction } from './src/redux/actions/getMahabubnagarAction';
+import { getMedakAction } from './src/redux/actions/getMedakAction';
+import { getNalgondaAction } from './src/redux/actions/getNalgondaAction';
+import { getNizamabadAction } from './src/redux/actions/getNizamabadAction';
+import { getRangareddyAction } from './src/redux/actions/getRangareddyAction';
+import { getWarangalAction } from './src/redux/actions/getWarangalAction';
 
 const App = () => {
   useEffect(() => {
@@ -57,6 +64,13 @@ const App = () => {
     store.dispatch(getVideoAction());
     store.dispatch(getPhotoGalleryAction());
     store.dispatch(getKarimnagarAction());
+    store.dispatch(getKhammamAction());
+    store.dispatch(getMahabubnagarAction());
+    store.dispatch(getMedakAction());
+    store.dispatch(getNalgondaAction());
+    store.dispatch(getNizamabadAction());
+    store.dispatch(getRangareddyAction());
+    store.dispatch(getWarangalAction());
     SplashScreen.hide(); //hides the splash screen on app load.
   }, []);
 

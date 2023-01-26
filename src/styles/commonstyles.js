@@ -32,6 +32,8 @@ export const commonstyles = StyleSheet.create({
     height: '100%',
     backgroundColor: whitecolor,
   },
+  spinnerView:{ justifyContent: "center", alignItems: "center", marginTop: 100 },
+  spinnerText:{ fontSize: 16, textAlign: "center", color: "#000000" },
   loader: {
     marginTop: 10,
     alignItems: 'center',
@@ -199,7 +201,8 @@ export const commonstyles = StyleSheet.create({
   },
   cateView: { flexDirection: 'row', marginLeft: 5, width: '100%' },
   cateImage: { width: 120, height: 90, borderRadius: 10 },
-  latestText: { color: blackcolor, fontFamily: 'Mandali-Regular', fontSize: 16, lineHeight: 25 },
+  latestText: { color: blackcolor, fontFamily: 'Mandali-Regular', fontSize: 16, lineHeight: 25
+  ,marginLeft:5,justifyContent: 'center' },
   latesttime: { color: appThemeColor, fontSize: 16, fontFamily: 'JIMS' },
 
   cardViewFirst: {
@@ -357,16 +360,15 @@ export const commonstyles = StyleSheet.create({
 
   },
   timeview: {
-    flexDirection: 'row',
+    flexDirection:'row',
     top: -5,
   },
   cateviewText: {
     flex: 1.9,
     fontFamily: 'Mandali-Regular', fontSize: 20, lineHeight: 33, justifyContent: 'center',
   },
-  cateviewImg: { marginRight: 5 },
+  cateviewImg: { marginRight: 5,flexDirection:'row' },
   cateflist: { paddingBottom: 100, top: 10, margin: 5 },
-  // cateflist: { paddingBottom: 50, top: 10, margin: 5 },
   photoflist:{ paddingBottom: 150, top: 10, margin: 5 },
 
   videoImg: {

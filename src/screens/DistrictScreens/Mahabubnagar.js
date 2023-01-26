@@ -1,6 +1,6 @@
 /* eslint-disable prettier/prettier */
 import React, { useEffect } from 'react';
-import { useDispatch, connect } from 'react-redux';
+import { useDispatch, connect, useSelector } from 'react-redux';
 // import getMahabubnagarAction from '../../redux/actions/getDistrictsAction';
 import CategoryUI from '../../components/CategoryUI';
 import { getMahabubnagarAction } from '../../redux/actions/getMahabubnagarAction';
@@ -13,12 +13,7 @@ const MahabubnagarScreen = ({
     route,
 }: Props) => {
 
-    const dispatch = useDispatch();
-
-    useEffect(() => {
-        dispatch(getMahabubnagarAction());
-
-    }, []);
+    mahabubnagarData = useSelector(state => state?.mahabubnagarReducer?.mahabubnagarData);
     // share function
 
     return (
@@ -35,12 +30,6 @@ type Props = {
     mahabubnagarData: Function,
     mahabubnagarLoading: Boolean,
 };
-const mapStateToProps = state => ({
-    mahabubnagarData: state.mahabubnagarReducer?.mahabubnagarData,
-    mahabubnagarLoading: state.mahabubnagarReducer?.mahabubnagarLoading,
-});
-const mapDispatchToProps = {
-    getMahabubnagarAction,
-};
 
-export default connect(mapStateToProps, mapDispatchToProps)(MahabubnagarScreen);
+
+export default MahabubnagarScreen;
